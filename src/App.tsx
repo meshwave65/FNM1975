@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import logoFNM from './assets/logo_fnm.jpeg'
 import cunhadoFoto from './assets/lsgo.png'
 
@@ -19,13 +18,13 @@ function App() {
       {/* Card Principal */}
       <main className="max-w-4xl mx-auto px-6 py-12">
         <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 text-center">
-          <div className="w-56 h-56 mx-auto rounded-full overflow-hidden border-8 border-white shadow-2xl mb-6">
+          <div className="w-64 h-64 mx-auto rounded-full overflow-hidden border-8 border-white shadow-2xl mb-6">
             <img
-                src={cunhadoFoto}
-                alt="Dr. Luiz Sergio Gomes de Oliveira"
-                className="w-full h-full object-cover"
+              src={cunhadoFoto}
+              alt="Dr. Luiz Sergio Gomes de Oliveira"
+              className="w-full h-full object-cover"
             />
-        </div>
+          </div>
          
           <h2 className="text-3xl font-semibold mb-2">Dr. Luiz Sergio Gomes de Oliveira</h2>
           <p className="text-green-200 mb-8">Médico • Formado em 1975</p>
