@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import logoFNM from './assets/logo_fnm.jpeg'
 import cunhadoFoto from './assets/lsgo.png'
-import paraninfo from './assets/paraninfo_cor.png'
 import fotoFaculdade from './assets/foto_antiga_fnm_1910.jpeg'
-import juramentoImg from './assets/juramento.jpeg'
+import juramentoImg from './assets/juramento.jpeg' // adicione esta foto
 
 function App() {
   const [paginaAtual, setPaginaAtual] = useState('capa')
@@ -56,25 +55,6 @@ function App() {
         </div>
       )}
 
-      {/* Paraninfo */}
-      {paginaAtual === 'paraninfo' && (
-        <div className="p-12 max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="w-80 h-80 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
-              <img src={paraninfo} alt="Paraninfo" className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <div className="uppercase tracking-widest text-[#c5a46e] text-sm mb-2">PARANINFO</div>
-              <h2 className="text-5xl font-bold mb-4">Prof. Dr. RODOLFO PAULO ROCCO</h2>
-              <p className="text-xl opacity-90">29/12/19** ★</p>
-              <div className="mt-8 prose prose-invert">
-                <p>Breve biografia do Paraninfo aqui...</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Juramento */}
       {paginaAtual === 'juramento' && (
         <div className="p-12 max-w-4xl mx-auto">
@@ -85,7 +65,13 @@ function App() {
             <ul className="list-none space-y-4">
               <li>— No exercício de minha profissão, cumprir todos os deveres a ela inerentes, com caridade e justiça.</li>
               <li>— Devotarei, com todo empenho, meus esforços, na aplicação das técnicas de tratamento, sempre atualizadas, para consecução do fim máximo — O bem-estar do paciente.</li>
-              {/* ... resto do juramento ... */}
+              <li>— Tratarei a todos com equanimidade e elevado zelo, não distinguindo raça, credo religioso, político, valores temporais e espirituais.</li>
+              <li>— Conservarei, de modo inviolável o vir e ouvir no trato com os pacientes.</li>
+              <li>— Guardarei devido recato no exercício de minhas funções, máximo quando de aplicação de técnicas que importem em maior intimidade, jamais prevalecendo desses momentos para fins que desabonem a dignidade de minha profissão.</li>
+              <li>— Usarei de complacência para com os que se manifestarem rebeldes e impetuosos.</li>
+              <li>— Buscarei, por todos os meios a meu alcance, fortalecer o ânimo dos pacientes para que não sucumbam moralmente e se desagreguem da sociedade.</li>
+              <li><strong>Por fim:</strong></li>
+              <li>— Não me considerarei um profissional se faltar a quaisquer desses propósitos.</li>
             </ul>
           </div>
         </div>

@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import logoFNM from './assets/logo_fnm.jpeg'
 import cunhadoFoto from './assets/lsgo.png'
-import paraninfo from './assets/paraninfo_cor.png'
-import fotoFaculdade from './assets/foto_antiga_fnm_1910.jpeg'
-import juramentoImg from './assets/juramento.jpeg'
+import fotoFaculdade from './assets/foto_antiga_fnm_1910.jpeg' // adicione esta foto
 
 function App() {
   const [paginaAtual, setPaginaAtual] = useState('capa')
@@ -37,65 +35,34 @@ function App() {
               <button onClick={() => setPaginaAtual('paraninfo')} className="block w-full text-left py-6 border-b border-[#c5a46e]/30 hover:text-white transition">PARANINFO</button>
               <button onClick={() => setPaginaAtual('patrono')} className="block w-full text-left py-6 border-b border-[#c5a46e]/30 hover:text-white transition">PATRONO</button>
               <button onClick={() => setPaginaAtual('homenagens')} className="block w-full text-left py-6 border-b border-[#c5a46e]/30 hover:text-white transition">HOMENAGENS ESPECIAIS</button>
-              <button onClick={() => setPaginaAtual('juramento')} className="block w-full text-left py-6 border-b border-[#c5a46e]/30 hover:text-white transition">JURAMENTO</button>
               <button onClick={() => setPaginaAtual('alunos')} className="block w-full text-left py-6 border-b border-[#c5a46e]/30 hover:text-white transition">ALUNOS DA TURMA</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* História */}
+      {/* História da Faculdade */}
       {paginaAtual === 'historia' && (
         <div className="p-12 max-w-4xl mx-auto">
-          <img src={fotoFaculdade} alt="Faculdade Nacional de Medicina" className="w-full rounded-3xl mb-12 shadow-2xl" />
+          <img src={fotoFaculdade} alt="Faculdade Nacional de Medicina" className="w-full rounded-3xl mb-12" />
           <h2 className="text-5xl font-bold mb-8">APRESENTAÇÃO</h2>
           <div className="prose prose-invert max-w-none text-lg leading-relaxed">
-            <p>A Faculdade Nacional de Medicina corresponde hoje à Faculdade de Medicina da UFRJ. Fundada em 1808, foi renomeada em 1937 e, desde 1973, funciona no campus da Cidade Universitária, na Ilha do Fundão.</p>
+            <p>A Faculdade Nacional de Medicina corresponde hoje à Faculdade de Medicina da UFRJ. Fundada em 1808, foi renomeada em 1937 e, desde 1973, funciona no campus da Cidade Universitária, na Ilha do Fundão. Atualmente, o curso integral exige dedicação de 6 anos (12 períodos).</p>
             <p>Historicamente, o edifício da instituição na Praia Vermelha foi um importante marco arquitetônico e palco de movimentos estudantis até sua demolição nos anos 70.</p>
           </div>
         </div>
       )}
 
-      {/* Paraninfo */}
-      {paginaAtual === 'paraninfo' && (
-        <div className="p-12 max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="w-80 h-80 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
-              <img src={paraninfo} alt="Paraninfo" className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <div className="uppercase tracking-widest text-[#c5a46e] text-sm mb-2">PARANINFO</div>
-              <h2 className="text-5xl font-bold mb-4">Prof. Dr. RODOLFO PAULO ROCCO</h2>
-              <p className="text-xl opacity-90">29/12/19** ★</p>
-              <div className="mt-8 prose prose-invert">
-                <p>Breve biografia do Paraninfo aqui...</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Juramento */}
-      {paginaAtual === 'juramento' && (
-        <div className="p-12 max-w-4xl mx-auto">
-          <img src={juramentoImg} alt="Juramento" className="w-full rounded-3xl mb-12 shadow-2xl" />
-          <h2 className="text-5xl font-bold mb-8">JURAMENTO</h2>
-          <div className="prose prose-invert max-w-none text-lg leading-relaxed">
-            <p><strong>PROMETO:</strong></p>
-            <ul className="list-none space-y-4">
-              <li>— No exercício de minha profissão, cumprir todos os deveres a ela inerentes, com caridade e justiça.</li>
-              <li>— Devotarei, com todo empenho, meus esforços, na aplicação das técnicas de tratamento, sempre atualizadas, para consecução do fim máximo — O bem-estar do paciente.</li>
-              {/* ... resto do juramento ... */}
-            </ul>
-          </div>
-        </div>
-      )}
-
-      <footer className="text-center py-12 text-[#c5a46e]/60 text-sm">
-        Turma Eterna • Faculdade Nacional de Medicina • 1975
-      </footer>
-    </div>
-  )
-}
-
-export default App
+      {/* Alunos */}
+      {paginaAtual === 'alunos' && (
+        <div className="p-12">
+          <h2 className="text-5xl font-bold text-center mb-16">ALUNOS DA TURMA 1975</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white/5 border border-[#c5a46e]/30 rounded-3xl p-8">
+              <div className="flex flex-col md:flex-row gap-12 items-center">
+                <div className="w-80 h-80 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
+                  <img src={cunhadoFoto} alt="Dr. Luiz Sergio" className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <h3 className="text-4xl font-bold mb-4">Dr. Luiz Sergio Gomes de Oliveira</h3>
+                  <p className="text-xl leading-relaxed opacity-90
