@@ -71,7 +71,7 @@ function App() {
         <div className="p-12 max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <div className="w-80 h-80 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
-              <img src="./src/assets/paraninfo_cor.png" alt="Paraninfo" className="w-full h-full object-cover" />
+              <img src="/assets/paraninfo_cor.png" alt="Paraninfo" className="w-full h-full object-cover" />
             </div>
             <div>
               <div className="uppercase tracking-widest text-[#c5a46e] text-sm mb-2">PARANINFO</div>
@@ -91,7 +91,7 @@ function App() {
         <div className="p-12 max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <div className="w-80 h-80 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
-              <img src="./src/assets/patrono.png" alt="Patrono" className="w-full h-full object-cover" />
+              <img src="/assets/patrono.png" alt="Patrono" className="w-full h-full object-cover" />
             </div>
             <div>
               <div className="uppercase tracking-widest text-[#c5a46e] text-sm mb-2">PATRONO</div>
@@ -171,7 +171,7 @@ function App() {
                 <div className="flex flex-col md:flex-row gap-8 items-center">
                   <div className="w-64 h-64 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
                     <img
-                        src={`./src/assets/${membro.nome.split(' ')[0].toLowerCase()}.${membro.id}.png`}
+                        src={`./assets/${membro.nome.split(' ')[0].toLowerCase()}.${membro.id}.png`}
                         alt={membro.nome}
                         className="w-full h-full object-cover"
                         onError={(e) => {
