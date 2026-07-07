@@ -1,15 +1,24 @@
-import { useState } from 'react'
-import logoFNM from './assets/logo_fnm.jpeg'
-import cunhadoFoto from './assets/lsgo.png'
-import paraninfo from './assets/paraninfo_cor.png'
-import patrono from './assets/patrono.png'
+import { useState, useEffect } from 'react'
+import { supabase } from './lib/supabase'
+import logoFNM from './assets/logo_fnm.png'
 import fotoFaculdade from './assets/foto_antiga_fnm_1910.jpeg'
 import juramentoImg from './assets/juramento.jpeg'
 
 function App() {
   const [paginaAtual, setPaginaAtual] = useState('capa')
+  const [formandos, setFormandos] = useState<any[]>([])
+  const [homenagensEspeciais, setHomenagensEspeciais] = useState<any[]>([])
 
   const voltar = () => setPaginaAtual('menu')
+
+  useEffect(() => {
+    if (paginaAtual === 'formandos') {
+      supabase.from('membros').select('*').eq('tipo', 'formando').order('nome').then(({ data }) => setFormandos(data || []))
+    }
+    if (paginaAtual === 'homenagens') {
+      supabase.from('membros').select('*').eq('tipo', 'homenagem_especial').order('nome').then(({ data }) => setHomenagensEspeciais(data || []))
+    }
+  }, [paginaAtual])
 
   return (
     <div className="min-h-screen bg-[#0a1f0a] text-[#e8d5b8] font-serif pb-20">
@@ -17,14 +26,11 @@ function App() {
       {paginaAtual === 'capa' && (
         <div className="min-h-screen flex flex-col items-center justify-center text-center p-12">
           <div className="border-8 border-[#c5a46e] p-8 bg-white/5 backdrop-blur">
-            <img src={logoFNM} alt="Logo FNM" className="w-72 h-72 object-contain mx-auto mb-12" />
+            <img src={logoFNM} alt="Logo FNM" className="w-1/2 h-1/2 max-w-[300px] object-contain mx-auto mb-12" />
             <h1 className="text-6xl font-bold tracking-wider mb-4">FACULDADE NACIONAL DE MEDICINA</h1>
             <p className="text-3xl opacity-80">Turma de 1975</p>
           </div>
-          <button 
-            onClick={() => setPaginaAtual('menu')}
-            className="mt-20 border border-[#c5a46e] text-[#c5a46e] px-16 py-4 text-xl tracking-widest hover:bg-[#c5a46e] hover:text-[#0a1f0a] transition"
-          >
+          <button onClick={() => setPaginaAtual('menu')} className="mt-20 border border-[#c5a46e] text-[#c5a46e] px-16 py-4 text-xl tracking-widest hover:bg-[#c5a46e] hover:text-[#0a1f0a] transition">
             ABRIR O LIVRO
           </button>
         </div>
@@ -54,7 +60,7 @@ function App() {
           <h2 className="text-5xl font-bold mb-8">APRESENTAÇÃO</h2>
           <div className="prose prose-invert max-w-none text-lg leading-relaxed">
             <p>A Faculdade Nacional de Medicina corresponde hoje à Faculdade de Medicina da UFRJ. Fundada em 1808, foi renomeada em 1937 e, desde 1973, funciona no campus da Cidade Universitária, na Ilha do Fundão. Atualmente, o curso integral exige dedicação de 6 anos (12 períodos).</p>
-            <p>Historicamente, o edifício da instituição na Praia Vermelha foi um importante marco arquitetônico e palco de movimentos estudantis até sua demolição nos anos 70.</p>
+            <p>Historicamente, o edifício da instituição na Praia Vermelha foi um importante marco arquitetônico e palco de movimentos estudantis até sua demolição nos anos 70. Para detalhes acadêmicos, programas de pós-graduação e formas de ingresso, consulte o portal da Faculdade de Medicina da UFRJ.</p>
           </div>
           <button onClick={voltar} className="mt-12 border border-[#c5a46e] text-[#c5a46e] px-8 py-3 rounded-full hover:bg-[#c5a46e] hover:text-[#0a1f0a] transition">VOLTAR AO ÍNDICE</button>
         </div>
@@ -65,7 +71,7 @@ function App() {
         <div className="p-12 max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <div className="w-80 h-80 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
-              <img src={paraninfo} alt="Paraninfo" className="w-full h-full object-cover" />
+              <img src="./src/assets/paraninfo_cor.png" alt="Paraninfo" className="w-full h-full object-cover" />
             </div>
             <div>
               <div className="uppercase tracking-widest text-[#c5a46e] text-sm mb-2">PARANINFO</div>
@@ -85,7 +91,7 @@ function App() {
         <div className="p-12 max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <div className="w-80 h-80 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
-              <img src={patrono} alt="Patrono" className="w-full h-full object-cover" />
+              <img src="./src/assets/patrono.png" alt="Patrono" className="w-full h-full object-cover" />
             </div>
             <div>
               <div className="uppercase tracking-widest text-[#c5a46e] text-sm mb-2">PATRONO</div>
@@ -97,6 +103,38 @@ function App() {
             </div>
           </div>
           <button onClick={voltar} className="mt-12 border border-[#c5a46e] text-[#c5a46e] px-8 py-3 rounded-full hover:bg-[#c5a46e] hover:text-[#0a1f0a] transition">VOLTAR AO ÍNDICE</button>
+        </div>
+      )}
+
+      {/* Homenagens Especiais */}
+      {paginaAtual === 'homenagens' && (
+        <div className="p-12 max-w-4xl mx-auto">
+          <h2 className="text-5xl font-bold mb-12 text-center">HOMENAGENS ESPECIAIS</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {homenagensEspeciais.map(membro => (
+              <div key={membro.id} className="bg-white/5 border border-[#c5a46e]/30 rounded-3xl p-8">
+                <div className="flex flex-col md:flex-row gap-8 items-center">
+                  <div className="w-64 h-64 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
+                    <img
+                        src={`/assets/${membro.nome.toLowerCase().replace(/ /g, '.').replace(/[^a-z0-9.]/g, '')}.png`}
+                        alt={membro.nome}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = './src/assets/semfoto.png';
+                        }}
+                        />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold mb-2">{membro.nome}</h3>
+                    <p className="text-xl opacity-90">
+                      {membro.data_nascimento} {membro.data_falecimento ? `(+)` : '★'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -127,20 +165,30 @@ function App() {
       {paginaAtual === 'formandos' && (
         <div className="p-12 max-w-4xl mx-auto">
           <h2 className="text-5xl font-bold mb-12 text-center">FORMANDOS DA TURMA 1975</h2>
-          <div className="bg-white/5 border border-[#c5a46e]/30 rounded-3xl p-8">
-            <div className="flex flex-col md:flex-row gap-12 items-center">
-              <div className="w-80 h-80 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
-                <img src={cunhadoFoto} alt="Dr. Luiz Sergio" className="w-full h-full object-cover" />
-              </div>
-              <div>
-                <div className="uppercase tracking-widest text-[#c5a46e] text-sm mb-2">FORMANDO</div>
-                <h3 className="text-4xl font-bold mb-4">Dr. Luiz Sergio Gomes de Oliveira</h3>
-                <p className="text-xl opacity-90">29/12/1948 ★</p>
-                <div className="mt-8 prose prose-invert text-lg">
-                  <p>Breve biografia aqui...</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {formandos.map(membro => (
+              <div key={membro.id} className="bg-white/5 border border-[#c5a46e]/30 rounded-3xl p-8">
+                <div className="flex flex-col md:flex-row gap-8 items-center">
+                  <div className="w-64 h-64 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
+                    <img
+                        src={`./src/assets/${membro.nome.split(' ')[0].toLowerCase()}.${membro.id}.png`}
+                        alt={membro.nome}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = './src/assets/semfoto.png';
+                        }}
+                     />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold mb-2">{membro.nome}</h3>
+                    <p className="text-xl opacity-90">
+                      {membro.data_nascimento} {membro.data_falecimento ? `(+)` : '★'}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       )}
