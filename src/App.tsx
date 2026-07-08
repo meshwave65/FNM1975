@@ -50,7 +50,7 @@ function App() {
       {paginaAtual === 'capa' && (
         <div className="min-h-screen flex flex-col items-center justify-center text-center p-12">
           <div className="border-8 border-[#c5a46e] p-8 bg-white/5 backdrop-blur">
-            <img src={logoFNM} alt="Logo FNM" className="w-72 h-72 object-contain mx-auto mb-12" />
+            <img src={logoFNM} alt="Logo FNM" className="w-1/2 h-1/2 object-contain mx-auto mb-12" />
             <h1 className="text-6xl font-bold tracking-wider mb-4">FACULDADE NACIONAL DE MEDICINA</h1>
             <p className="text-3xl opacity-80">Turma de 1975</p>
           </div>
