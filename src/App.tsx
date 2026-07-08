@@ -4,11 +4,24 @@ import logoFNM from './assets/logo_fnm.png'
 import fotoFaculdade from './assets/foto_antiga_fnm_1910.jpeg'
 import juramentoImg from './assets/juramento.jpeg'
 
+const formatDate = (dateString: string | null) => {
+  if (!dateString) return '';
+  
+  // Se for YYYY-MM-DD
+  if (dateString.includes('-')) {
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}/${year}`;
+  }
+  
+  return dateString;
+};
+
+
+
 function App() {
   const [paginaAtual, setPaginaAtual] = useState('capa')
   const [formandos, setFormandos] = useState<any[]>([])
   const [homenagensEspeciais, setHomenagensEspeciais] = useState<any[]>([])
-
   const voltar = () => setPaginaAtual('menu')
 
   useEffect(() => {
@@ -128,7 +141,7 @@ function App() {
                   <div>
                     <h3 className="text-3xl font-bold mb-2">{membro.nome}</h3>
                     <p className="text-xl opacity-90">
-                      {membro.data_nascimento} {membro.data_falecimento ? `(+)` : '★'}
+                        {formatDate(membro.data_nascimento)} {membro.data_falecimento ? `(+)` : '★'}
                     </p>
                   </div>
                 </div>
@@ -171,19 +184,20 @@ function App() {
                 <div className="flex flex-col md:flex-row gap-8 items-center">
                   <div className="w-64 h-64 flex-shrink-0 rounded-2xl overflow-hidden border-4 border-[#c5a46e]">
                     <img
-                        src={`./assets/${membro.nome.split(' ')[0].toLowerCase()}.${membro.id}.png`}
+                        src={`/assets/${membro.foto_principal}`}
                         alt={membro.nome}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                             e.currentTarget.onerror = null;
-                            e.currentTarget.src = './src/assets/semfoto.png';
+                            e.currentTarget.src = '/assets/semfoto.png';
                         }}
-                     />
+                    />
                   </div>
                   <div>
                     <h3 className="text-3xl font-bold mb-2">{membro.nome}</h3>
                     <p className="text-xl opacity-90">
-                      {membro.data_nascimento} {membro.data_falecimento ? `(+)` : '★'}
+                      {membro.data_nascimento ? membro.data_nascimento.split('-').reverse().join('/') : ''}
+                        {membro.data_falecimento ? ` (+)` : ' ★'}
                     </p>
                   </div>
                 </div>
