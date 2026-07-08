@@ -186,11 +186,11 @@ function App() {
                     <img
                         src={`/assets/${membro.foto_principal}`}
                         alt={membro.nome}
-                        className="w-full h-full object-cover"
+                        className="w-[600px] h-auto"
                         onError={(e) => {
                             e.currentTarget.onerror = null;
-                            e.currentTarget.src = '/assets/semfoto.png';
-                        }}
+                            e.currentTarget.src = "/assets/semfoto.png";
+                       }}
                     />
                   </div>
                   <div>
