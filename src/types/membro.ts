@@ -1,23 +1,23 @@
-```ts
 export interface Membro {
-  id: string
+  id: string;
 
-  nome: string
+  nome: string;
 
   tipo:
-    | 'formando'
-    | 'homenagem_especial'
-    | 'homenagem_administrativa'
+    | "formando"
+    | "paraninfo"
+    | "patrono"
+    | "homenagem";
 
-  foto_principal?: string | null
+  foto_principal?: string | null;
 
-  data_nascimento?: string | null
+  mini_biografia?: string | null;
 
-  data_falecimento?: string | null
+  data_nascimento?: string | null;
 
-  vivo?: boolean | null
+  data_falecimento?: string | null;
 
-  created_at?: string
+  vivo: boolean;
+
+  destaque?: boolean;
 }
-```
-

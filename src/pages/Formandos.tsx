@@ -1,86 +1,51 @@
 import { useState } from "react";
+
 import { useMembros } from "../hooks/useMembros";
+
 import SearchBar from "../components/UI/SearchBar";
 import MembroCard from "../components/MembroCard";
-
+import BottomNav from "../layout/BottomNav";
 
 interface FormandosProps {
   voltar: () => void;
 }
 
-
 export default function Formandos({
   voltar,
 }: FormandosProps) {
-
-
   const [busca, setBusca] = useState("");
-
 
   const {
     membros,
-    carregando
+    carregando,
   } = useMembros("formando");
 
-
   const lista = membros.filter((membro) =>
-    membro.nome
-      .toLowerCase()
-      .includes(busca.toLowerCase())
+    membro.nome.toLowerCase().includes(busca.toLowerCase())
   );
 
-
   return (
-
     <>
+      <div className="pb-32 p-12 max-w-5xl mx-auto">
 
-      <div
-        className="
-          pb-32
-          p-12
-          max-w-5xl
-          mx-auto
-        "
-      >
-
-
-        <h2
-          className="
-            text-5xl
-            font-bold
-            text-center
-            mb-12
-          "
-        >
+        <h2 className="text-5xl font-bold text-center mb-12">
           FORMANDOS DA TURMA 1975
         </h2>
 
-
+        <SearchBar
+          value={busca}
+          onChange={setBusca}
+        />
 
         {carregando ? (
 
-          <p
-            className="
-              text-center
-              mt-12
-            "
-          >
+          <p className="text-center mt-12">
             Carregando...
           </p>
 
-
         ) : (
 
-
-          <div
-            className="
-              grid
-              grid-cols-1
-              md:grid-cols-2
-              gap-8
-              mt-10
-            "
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
 
             {lista.map((membro) => (
 
@@ -95,19 +60,13 @@ export default function Formandos({
 
         )}
 
-
       </div>
 
-
-
-      <SearchBar
-        busca={busca}
-        setBusca={setBusca}
+      <BottomNav
+        voltar={voltar}
+        mostrarLimpar
+        onClear={() => setBusca("")}
       />
-
-
     </>
-
   );
-
 }
